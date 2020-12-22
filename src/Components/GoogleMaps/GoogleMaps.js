@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
+require("dotenv").config();
 
 
 const mapStyles = { 
@@ -36,11 +37,11 @@ export const GoogleMapContainer = () => {
     }, [])
 
 
-    const googleApiKey='AIzaSyCeH1mhLsEJFzLUol5eDRmfP8uFHHqltPE';
+    const API_KEY = process.env.REACT_APP_API_KEY;
     
     useEffect(() => {
       console.log(currentPosition)
-        axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=mogo&inputtype=textquery&fields=formatted_address,name,geometry,photos&key=${googleApiKey}`)
+        axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=mogo&inputtype=textquery&fields=formatted_address,name,geometry,photos&key=${API_KEY}`)
         .then((results) => {
             console.log(results.data);
           }, (error) => {
